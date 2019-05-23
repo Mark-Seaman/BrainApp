@@ -1,0 +1,9 @@
+.*
+!.gitignore
+
+__pycache__
+
+env
+
+secret_settings.py
+
