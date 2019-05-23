@@ -1,0 +1,11 @@
+#!/bin/bash
+# Commit all changes
+
+cd
+git add . &&
+git commit -m "$*" &&
+git pull &&
+git push &&
+git status
+
+
