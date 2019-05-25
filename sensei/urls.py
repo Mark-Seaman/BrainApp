@@ -20,20 +20,31 @@ from django.http import HttpResponse
 
 # Home View
 def home(request):
-    title = "World's Simplest App"
+    title = "Home Page"
     text = '''
-    Digital Ocean creates a blank Django app which is replaced by this code.
-    This is the simplest Django app that is possible. All extra stuff has
-    been stripped out. Only essential code remains. Source code lives
-    in <b>~/hammer/simple.py</b>.
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="index">Index</a></li>
+    </ul>
+
     '''
     return HttpResponse("<h1>%s</h1><p>%s</p>" % (title,text))
 
-
+# Index View
+def index(request):
+    title = "Index Page"
+    text = '''
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="index">Index</a></li>
+    </ul>
+    '''
+    return HttpResponse("<h1>%s</h1><p>%s</p>" % (title,text))
+ 
 # URL Route
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home),
-    url(r'^newpage$', home),
+    url(r'^index$', index),
 ]
 
