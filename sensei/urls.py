@@ -34,5 +34,6 @@ def home(request):
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home),
+    url(r'^newpage$', home),
 ]
 
