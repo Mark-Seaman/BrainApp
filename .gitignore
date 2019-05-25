@@ -7,3 +7,5 @@ env
 
 secret_settings.py
 
+static/admin
+
