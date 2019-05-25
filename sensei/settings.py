@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['157.230.163.78', 'localhost']
+ALLOWED_HOSTS = ['157.230.163.78', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -68,21 +68,6 @@ WSGI_APPLICATION = 'sensei.wsgi.application'
 
 # Secrets
 from .secret_settings import DATABASES, SECRET_KEY
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sensei',
-        'USER': 'sensei',
-        'PASSWORD': 'MS1959-li',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
 
 
 # Password validation
