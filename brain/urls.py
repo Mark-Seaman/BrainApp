@@ -2,6 +2,9 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.http import HttpResponse
 
+from .views import BrainView, HomeView
+
+
 # Home View
 def home(request):
     title = "Brain Page"
@@ -30,7 +33,9 @@ def index(request):
 
 # URL Routes 
 urlpatterns = [
-    url(r'^$', home),
+    # url(r'^$', home),
+    url(r'^$', HomeView.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^index$', index),
+    url(r'^brain$', BrainView.as_view()),
 ]
