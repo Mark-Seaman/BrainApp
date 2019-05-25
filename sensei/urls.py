@@ -13,38 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.contrib import admin
+from django.conf.urls import url, include
+# from django.contrib import admin
 from django.http import HttpResponse
 
-
-# Home View
 def home(request):
-    title = "Home Page"
+    title = "Root Page"
     text = '''
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="index">Index</a></li>
+        <li><a href="/brain/">Brain</a></li>
+        <li><a href="/brain/index">Index</a></li>
     </ul>
 
     '''
     return HttpResponse("<h1>%s</h1><p>%s</p>" % (title,text))
 
-# Index View
-def index(request):
-    title = "Index Page"
-    text = '''
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="index">Index</a></li>
-    </ul>
-    '''
-    return HttpResponse("<h1>%s</h1><p>%s</p>" % (title,text))
- 
 # URL Route
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    # url(r'^admin/', admin.site.urls),
     url(r'^$', home),
-    url(r'^index$', index),
+    # url(r'^index$', index),
+    url(r'^brain/', include('brain.urls')),
 ]
 
