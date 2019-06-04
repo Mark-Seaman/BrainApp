@@ -8,6 +8,9 @@ from django.utils.timezone import now
 class HomeView(TemplateView):
     template_name = 'home.html'
 
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
 
 class BrainView(TemplateView):
     template_name = 'brain_theme.html'
