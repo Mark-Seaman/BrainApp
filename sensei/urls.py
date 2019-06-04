@@ -32,8 +32,9 @@ def home(request):
 # URL Route
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^$', home),
+#    url(r'^$', home),
     # url(r'^index$', index),
+    url(r'^', include('brain.urls')),
     url(r'^brain/', include('brain.urls')),
 ]
 
