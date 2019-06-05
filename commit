@@ -1,11 +1,20 @@
 #!/bin/bash
 # Commit all changes
 
+echo 'Sensei Server commit'
+
 cd
 git add . &&
-git commit -m "$*" &&
+git commit -m "$*"
 git pull &&
 git push &&
 git status
 
+echo 'Sensei Document commit'
 
+cd Documents
+git add . &&
+git commit -m "$*" 
+git pull &&
+git push &&
+git status
