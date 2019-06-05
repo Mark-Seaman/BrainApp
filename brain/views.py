@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from subprocess import Popen, PIPE
+from sys import version_info
 
 # Create your views here.
 from django.views.generic import RedirectView, TemplateView
@@ -20,3 +22,25 @@ class BrainView(TemplateView):
         header = dict(title='Brain App Demo', subtitle='Brain Page Template')
         return dict(title=title, text="no text", header=header, time=now())
 
+
+class MarkdownView(TemplateView):
+    template_name = 'markdown.html'
+
+    def get_context_data(self, **kwargs):
+        title = 'Markdown View'
+        text=shell_pipe('pandoc', "## no text in pipe")
+        return dict(title=title, text=text)
+    
+    
+def shell_pipe(command, stdin=''):
+    p = Popen(command, stdin=PIPE, stdout=PIPE)
+    if version_info.major == 3:
+        (out, error) = p.communicate(input=stdin.encode('utf-8'))
+        if error:
+            return error.decode('utf-8') + out.decode('utf-8')
+        return out.decode('utf-8')
+    else:
+        (out, error) = p.communicate(input=stdin)
+        if error:
+            return "**stderr**\n" + error + out
+        return out
