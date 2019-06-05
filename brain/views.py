@@ -26,10 +26,14 @@ class MarkdownView(TemplateView):
 
     def get_context_data(self, **kwargs):
         title = 'Markdown View'
-        markdown = open('Documents/seamanfamily/brain/Markdown.md').read()
+        markdown = read_markdown('seamanfamily/brain/Markdown.md')
         text = markdown_to_html(markdown)
         return dict(title=title, text=text)
+
     
+def read_markdown(doc):
+    return open('Documents/%s' % doc).read()
+   
     
 def markdown_to_html(markdown):
     return shell_pipe('pandoc', markdown)
