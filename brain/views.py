@@ -22,16 +22,31 @@ class BrainView(TemplateView):
         header = dict(title='Brain App Demo', subtitle='Brain Page Template')
         return dict(title=title, text="no text", header=header, time=now())
 
+markdown = '''# Markdown Text Format
+## Cheatsheet for formats
 
+Paragraph
+
+* Bullet list
+* List item
+
+1. Numbered list
+1. List item
+
+'''
 class MarkdownView(TemplateView):
     template_name = 'markdown.html'
 
     def get_context_data(self, **kwargs):
         title = 'Markdown View'
-        text=shell_pipe('pandoc', "## no text in pipe")
+        text = markdown_to_html(markdown)
         return dict(title=title, text=text)
     
     
+def markdown_to_html(markdown):
+    return shell_pipe('pandoc', markdown)
+
+
 def shell_pipe(command, stdin=''):
     p = Popen(command, stdin=PIPE, stdout=PIPE)
     if version_info.major == 3:
