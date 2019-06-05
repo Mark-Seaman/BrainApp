@@ -52,6 +52,7 @@ class DocView(TemplateView):
         title = 'Brain App Demo'
         path = self.kwargs.get('title', 'Index')
         text = document_html(path)
+        header = dict(title='Brain App Demo', subtitle='Document View')
         return dict(title=title, text=text)
 
 
