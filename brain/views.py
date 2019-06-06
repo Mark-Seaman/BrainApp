@@ -1,8 +1,9 @@
 from django.views.generic import RedirectView, TemplateView
 from django.utils.timezone import now
 from os import listdir
+from os.path import isdir, join
 
-from brain.brain import document_html
+from .brain import document_html
 
 
 class RedirectPage(RedirectView):
@@ -17,9 +18,13 @@ class FolderView(TemplateView):
         title = 'Folder View'
         path = self.kwargs.get('title', 'Index')
         # path = 'seamanfamily/brain'
-        files = listdir('Documents/'+path)
+        files = list_files(path)
         header = dict(title='Brain App Demo', subtitle='Folder View')
         return dict(header=header, title=title, files=files, time=now())
+
+
+def list_files(path):
+    return ["%s/" % f if isdir(join('Documents',path,f)) else f for f in listdir('Documents/' + path)]
 
 
 # Display the document that matches the URL
