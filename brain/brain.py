@@ -1,3 +1,5 @@
+from os import listdir
+from os.path import isdir, join
 from subprocess import Popen, PIPE
 from sys import version_info
 
@@ -7,14 +9,25 @@ def document_html(path):
     return markdown_to_html(read_markdown(path))
 
 
-# Read the specific document
-def read_markdown(doc):
-    return open('Documents/%s' % doc).read()
+# Extract the title from the file text
+def document_title(doc):
+    text = read_markdown(doc)
+    return text.split('\n')[0][2:]
+
+
+# List the file as hyperlinks to documents
+def list_files(path):
+    return ["%s/" % f if isdir(join('Documents',path,f)) else f for f in listdir('Documents/' + path)]
 
 
 # Convert markdown text to HTML
 def markdown_to_html(markdown):
     return shell_pipe('pandoc', markdown)
+
+
+# Read the specific document
+def read_markdown(doc):
+    return open('Documents/%s' % doc).read()
 
 
 # Run an application and connect with input and output
@@ -30,3 +43,5 @@ def shell_pipe(command, stdin=''):
         if error:
             return "**stderr**\n" + error + out
         return out
+
+
