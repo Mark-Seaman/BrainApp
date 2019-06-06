@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.views.generic import RedirectView, TemplateView
 from django.utils.timezone import now
-from os.path import join
+from os.path import exists, join, isdir
 
 from .brain import document_html, list_files
 
@@ -11,7 +11,6 @@ class RedirectPage(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         path = join('/', self.request.path[1:], 'Index')
-
 
 
 # Display the document that matches the URL
@@ -37,10 +36,11 @@ class DocView(TemplateView):
         header = dict(title='Brain App Demo', subtitle='Document View')
         return dict(header=header, title=title, text=text, time=now())
 
-    # def get(self, request, *args, **kwargs):
-    #     url = doc_page(self.request.path[1:])
-    #     if url:
-    #         log('REDIRECT: %s --> %s' % (title, url))
-    #         return HttpResponseRedirect('/%s/' % url)
-    #
-    #     return self.render_to_response(self.get_context_data(**kwargs))
+    def get(self, request, *args, **kwargs):
+        doc = self.request.path[1:]
+        path = join('Documents', doc)
+        if isdir(path) and exists(join(path, 'Index')):
+            # log('REDIRECT: %s --> %s' % (title, url))
+            return HttpResponseRedirect('/%s/Index' % doc)
+
+        return self.render_to_response(self.get_context_data(**kwargs))
