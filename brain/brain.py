@@ -1,5 +1,5 @@
 from os import listdir
-from os.path import isdir, join
+from os.path import exists, isdir, join
 from subprocess import Popen, PIPE
 from sys import version_info
 
@@ -7,6 +7,17 @@ from sys import version_info
 # Read document as HTML
 def document_html(path):
     return markdown_to_html(read_markdown(path))
+
+
+# Create a list of documents (doc, title)
+def doc_list(path):
+    return [(document_title(join(path,f)),f) for f in list_files(path)]
+
+
+def doc_redirect(doc):
+    path = join('Documents', doc)
+    if isdir(path) and exists(join(path, 'Index.md')):
+        return '/%s/Index.md' % doc
 
 
 # Extract the title from the file text

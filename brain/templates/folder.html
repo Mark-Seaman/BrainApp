@@ -4,13 +4,31 @@
 
     <h1>{{ title }}</h1>
 
-    <p>Documents in folder</p>
-    <ul>
-        {% for f in files %}
-            <li>
-                <a href="{{ f }}">{{ f }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% if docs %}
+        <p>Document List</p>
+        <ul>
+            {% for d in docs %}
+                <li>
+                    <a href="{{ d.1 }}">{{ d.0 }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents in this folder.</p>
+    {% endif %}
+
+    {% if files %}
+
+        <p>Documents in folder</p>
+        <ul>
+            {% for f in files %}
+                <li>
+                    <a href="{{ f }}">{{ f }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
 
 {% endblock %}
