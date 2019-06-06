@@ -6,11 +6,11 @@ from os.path import exists, join, isdir
 from .brain import document_html, list_files
 
 
-class RedirectPage(RedirectView):
+class RedirectRoot(RedirectView):
     url = '/seamanfamily/brain/'
 
-    def get_redirect_url(self, *args, **kwargs):
-        path = join('/', self.request.path[1:], 'Index')
+    # def get_redirect_url(self, *args, **kwargs):
+    #     path = join('/', self.request.path[1:], 'Index')
 
 
 # Display the document that matches the URL
@@ -38,9 +38,13 @@ class DocView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         doc = self.request.path[1:]
-        path = join('Documents', doc)
-        if isdir(path) and exists(join(path, 'Index')):
-            # log('REDIRECT: %s --> %s' % (title, url))
-            return HttpResponseRedirect('/%s/Index' % doc)
-
+        url = doc_redirect(doc)
+        if url:
+            return HttpResponseRedirect(url)
         return self.render_to_response(self.get_context_data(**kwargs))
+
+
+def doc_redirect(doc):
+    path = join('Documents', doc)
+    if isdir(path) and exists(join(path, 'Index.md')):
+        return '/%s/Index.md' % doc
