@@ -5,14 +5,22 @@
     <h1>{{ title }}</h1>
 
     {% if docs %}
-        <p>Document List</p>
-        <ul>
-            {% for d in docs %}
-                <li>
-                    <a href="{{ d.1 }}">{{ d.0 }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+
+        <div class="card">
+            <div class="card-header">
+                Document List
+            </div>
+            <div class="card-body">
+                <ul>
+                    {% for d in docs %}
+                        <li>
+                            <a href="{{ d.1 }}">{{ d.0 }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
     {% else %}
         <p>No documents in this folder.</p>
     {% endif %}
