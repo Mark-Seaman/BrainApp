@@ -15,8 +15,8 @@ class FolderView(TemplateView):
 
     def get_context_data(self, **kwargs):
         title = 'Folder View'
-        # path = self.kwargs.get('title', 'Index')
-        path = 'seamanfamily/brain'
+        path = self.kwargs.get('title', 'Index')
+        # path = 'seamanfamily/brain'
         files = listdir('Documents/'+path)
         header = dict(title='Brain App Demo', subtitle='Folder View')
         return dict(header=header, title=title, files=files, time=now())
