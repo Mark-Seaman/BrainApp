@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
 # How hosts access the server
-ALLOWED_HOSTS = ['seamanfamily.org', '127.0.0.1',]
+ALLOWED_HOSTS = ['seamanfamily.org', 'localhost', '127.0.0.1',]
 # ALLOWED_HOSTS = ['157.230.163.78', '127.0.0.1', 'localhost', 'seamanfamily.org']
 
 
@@ -97,6 +97,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-# STATICFILES_DIRS = (BASE_DIR + '/static',)
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATICFILES_DIRS = (BASE_DIR + '/static',)
 

@@ -7,6 +7,8 @@ Documents
 
 env
 
+Pipfile*
+
 secret_settings.py
 
 static/admin
