@@ -18,7 +18,7 @@ footer {
 header {
     background-color: green;
     border-radius: 20px;
-    box-shadow: 2px 2px 5px grey;
+    box-shadow: 2px 2px 4px grey;
     margin: 2em;
     padding: 2em;
 }
@@ -40,17 +40,18 @@ header h2 {
 }
 
 hr {
-    border: 3px solid dodgerblue;
+    border: 3px solid green;
+    box-shadow: 2px 2px 4px grey;
 }
 
 h1 {
     color: green;
     text-align: center;
-    text-shadow: 2px 2px 4px grey;
+    text-shadow: 2px 2px 3px grey;
 }
 
 h2 {
-    border: 1px solid dodgerblue;
+    border: 1px solid green;
     border-radius: 20px;
     box-shadow: 2px 2px 4px grey;
     color: green;
@@ -69,9 +70,9 @@ main {
 }
 
 pre {
-    border: 1px solid dodgerblue;
-    border-left: 3px solid dodgerblue;
-    border-right: 3px solid dodgerblue;
+    border: 1px solid green;
+    border-left: 3px solid green;
+    border-right: 3px solid green;
     background-color: #f0f0f0;
     margin-left: 3em;
     padding: 10px 20px;

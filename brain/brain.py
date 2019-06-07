@@ -5,6 +5,9 @@ from sys import version_info
 
 
 # Read document as HTML
+from django.utils.timezone import now
+
+
 def document_html(path):
     return markdown_to_html(read_markdown(path))
 
@@ -56,6 +59,13 @@ def markdown_to_html(markdown):
     return shell_pipe('pandoc', markdown)
 
 
+# Return context settings for the views
+def page_settings(**kwargs):
+    kwargs['header'] = dict(title='My Notes', subtitle=kwargs.get('title'))
+    kwargs['time'] = now()
+    return kwargs
+
+
 # Read the specific document
 def read_markdown(doc):
     path = join('Documents', doc)
@@ -87,4 +97,4 @@ def shell_pipe(command, stdin=''):
             return "**stderr**\n" + error + out
         return out
 
-
+    return settings

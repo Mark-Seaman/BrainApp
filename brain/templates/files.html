@@ -1,0 +1,22 @@
+{% extends 'brain_theme.html' %}
+
+{% block content %}
+
+    <h1>{{ title }}</h1>
+
+    <a href="../">Parent Folder</a>
+
+    {% if files %}
+        <p>Documents in folder</p>
+        <ul>
+            {% for f in files %}
+                <li>
+                    <a href="{{ f }}">{{ f }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+
+{% endblock %}

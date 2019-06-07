@@ -3,9 +3,11 @@
 
 {% block content %}
 
-    <h1>Missing Document</h1>
+    <h1>{{ title }}</h1>
 
+    <p>Page URL: {{ doc }}</p>
     <p>Missing document: {{ path }}</p>
     <p>Go to <a href="../Index">Index</a></p>
+    <p>Go to <a href="/">Home</a></p>
 
 {% endblock %}

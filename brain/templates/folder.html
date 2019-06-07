@@ -2,15 +2,18 @@
 
 {% block content %}
 
-    <h1>{{ title }}</h1>
+{#    <h1>Folder - {{ title }}</h1>#}
 
     <a href="../">Parent Folder</a>
 
     {% if text %}
+
         {% autoescape off %}
             <p>{{ text }}</p>
         {% endautoescape %}
+
     {% else %}
+
         <p><b>Note:</b>No Index File in this folder.</p>
 
         {% if docs %}
@@ -33,19 +36,19 @@
         {% else %}
             <p>No documents in this folder.</p>
         {% endif %}
+
     {% endif %}
 
-    {% if files %}
-
-        <p>Documents in folder</p>
-        <ul>
-            {% for f in files %}
-                <li>
-                    <a href="{{ f }}">{{ f }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    {#    {% if files %}#}
+    {#        <p>Documents in folder</p>#}
+    {#        <ul>#}
+    {#            {% for f in files %}#}
+    {#                <li>#}
+    {#                    <a href="{{ f }}">{{ f }}</a>#}
+    {#                </li>#}
+    {#            {% endfor %}#}
+    {#        </ul>#}
+    {#    {% endif %}#}
 
 
 
