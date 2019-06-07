@@ -19,10 +19,16 @@ def doc_list(path):
     # return [(document_title(join(path,f)),f) for f in list_files(path)]
 
 
+# Redirect to an Index for any directory
 def doc_redirect(doc):
     path = join('Documents', doc)
-    if isdir(path) and exists(join(path, 'Index.md')):
-        return '/%s/Index.md' % doc
+    if isdir(path):
+        if exists(join(path, 'Index')):
+            return '/%s/Index' % doc
+        if exists(join(path, 'Index.md')):
+            return '/%s/Index' % doc
+    if not exists(path) and not exists(path + '.md'):
+        return '/%s/Missing' % doc
 
 
 # Extract the title from the file text
