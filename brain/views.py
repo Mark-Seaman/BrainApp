@@ -11,8 +11,7 @@ class DocView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         doc = self.kwargs.get('title')
-        while doc.endswith('/'):
-            doc = doc[:-1]
+
         url = doc_redirect(doc)
         if url:
             return HttpResponseRedirect(url)
