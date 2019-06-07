@@ -1,5 +1,5 @@
 from os import listdir
-from os.path import exists, isdir, join
+from os.path import exists, isdir, isfile, join
 from subprocess import Popen, PIPE
 from sys import version_info
 
@@ -11,7 +11,12 @@ def document_html(path):
 
 # Create a list of documents (doc, title)
 def doc_list(path):
-    return [(document_title(join(path,f)),f) for f in list_files(path)]
+    files = list_files(path)
+    result = []
+    for f in files:
+        result.append((document_title(join(path, f)), f))
+    return result
+    # return [(document_title(join(path,f)),f) for f in list_files(path)]
 
 
 def doc_redirect(doc):
@@ -28,7 +33,16 @@ def document_title(doc):
 
 # List the file as hyperlinks to documents
 def list_files(path):
-    return ["%s/" % f if isdir(join('Documents',path,f)) else f for f in listdir('Documents/' + path)]
+    files = listdir('Documents/' + path)
+    result = []
+    for f in files:
+        if isdir(join('Documents', path, f)):
+            result.append("%s/" % f)
+        else:
+            if f != '.DS_Store':
+                result.append(f)
+    return result
+    # return ["%s/" % f if isdir(join('Documents',path,f)) else f for f in listdir('Documents/' + path)]
 
 
 # Convert markdown text to HTML
@@ -38,7 +52,19 @@ def markdown_to_html(markdown):
 
 # Read the specific document
 def read_markdown(doc):
-    return open('Documents/%s' % doc).read()
+    path = join('Documents', doc)
+    if exists(path) and isfile(path):
+        return open(path).read()
+    else:
+        return 'No DOCUMENT Found, %s' % doc
+
+
+# Read the document formatted as HTML
+def render_doc(doc):
+    path = join('Documents', doc)
+    if not exists(path) and exists(path + '.md'):
+        doc = doc + '.md'
+    return document_html(doc)
 
 
 # Run an application and connect with input and output

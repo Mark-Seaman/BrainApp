@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from .views import DocView, FolderView, IndexView, RedirectRoot
+from .views import DocView, FolderView, IndexView, RedirectIndex, RedirectRoot
 
 
 # URL Routes
@@ -8,12 +8,13 @@ urlpatterns = [
 
     url(r'^$',                              RedirectRoot.as_view()),
     url(r'^(?P<title>[\w/.]*)/Index$',      IndexView.as_view()),
-    url(r'^(?P<title>[\w/.]*)/$',           FolderView.as_view()),
+    url(r'^(?P<title>[\w/.]*)/$',           RedirectIndex.as_view()),
     url(r'^(?P<title>[\w/.]*)$',            DocView.as_view()),
 ]
 
+# url(r'^(?P<title>[\w/.]*)/$',           FolderView.as_view()),
 
-    # from django.conf import settings
+# from django.conf import settings
     # from django.conf.urls.static import static
     # from django.contrib import admin
 

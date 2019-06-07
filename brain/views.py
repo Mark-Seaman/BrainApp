@@ -3,7 +3,7 @@ from django.views.generic import RedirectView, TemplateView
 from django.utils.timezone import now
 from os.path import exists, join, isdir
 
-from .brain import document_html, doc_list, doc_redirect, list_files
+from .brain import document_html, doc_list, doc_redirect, list_files, render_doc
 
 
 class RedirectRoot(RedirectView):
@@ -12,7 +12,7 @@ class RedirectRoot(RedirectView):
 
 class RedirectIndex(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        return join('/', self.request.path[1:], 'Index')
+        return join(self.request.path[:-1], 'Index')
 
 
 # Display the document that matches the URL
@@ -36,6 +36,8 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         title = self.kwargs.get('title')
         doc = self.request.path[1:]
+        if doc.endswith('/'):
+            doc = doc[:-1]
         path = join('Documents', title)
         if exists(path) and isdir(path):
             docs = doc_list(title)
@@ -67,8 +69,3 @@ class DocView(TemplateView):
         return self.render_to_response(self.get_context_data(**kwargs))
 
 
-def render_doc(doc):
-    path = join('Documents', doc)
-    if not exists(path) and exists(path + '.md'):
-        doc = doc + '.md'
-    return document_html(doc)
