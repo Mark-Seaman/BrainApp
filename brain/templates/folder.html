@@ -9,28 +9,28 @@
             <p>{{ text }}</p>
         {% endautoescape %}
     {% else %}
-        <p>No Index File in this folder.</p>
-    {% endif %}
+        <p><b>Note:</b>No Index File in this folder.</p>
 
-    {% if docs %}
+        {% if docs %}
 
-        <div class="card">
-            <div class="card-header">
-                Document List
+            <div class="card">
+                <div class="card-header">
+                    Document List
+                </div>
+                <div class="card-body">
+                    <ul>
+                        {% for d in docs %}
+                            <li>
+                                <a href="{{ d.1 }}">{{ d.0 }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-            <div class="card-body">
-                <ul>
-                    {% for d in docs %}
-                        <li>
-                            <a href="{{ d.1 }}">{{ d.0 }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
 
-    {% else %}
-        <p>No documents in this folder.</p>
+        {% else %}
+            <p>No documents in this folder.</p>
+        {% endif %}
     {% endif %}
 
     {% if files %}
