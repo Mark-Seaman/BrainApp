@@ -30,6 +30,7 @@ def doc_redirect(doc):
             return '/%s/Index' % doc
         if exists(join(path, 'Index.md')):
             return '/%s/Index' % doc
+        return '/%s/Files' % doc
     if not exists(path) and not exists(path + '.md'):
         return '/%s/Missing' % doc
 
