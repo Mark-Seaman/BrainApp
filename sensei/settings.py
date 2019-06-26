@@ -3,10 +3,15 @@ Django settings for sensei project.
 
 """
 
-import os
+# import os
+from os.path import dirname, abspath
+from os.path import join
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = dirname(dirname(abspath(__file__)))
+LOG_DIR = join(BASE_DIR, 'log')
+TEST_DIR = join(BASE_DIR, 'test')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -27,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'brain',
+    'tool',
 ]
 
 MIDDLEWARE = [
