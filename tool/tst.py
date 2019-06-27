@@ -1,39 +1,15 @@
 from inspect import getmembers, isfunction
 from os import listdir, system
-from os.path import join
 
 from sensei.settings import TEST_DIR
 
 from .log import log
 from .models import Test
-from .shell import differences, banner, shell
+from .shell import differences, banner
 
-
-def tst_find():
-    tests = test_dictionary()
-    for m in sorted(tests):
-        print(m)
-        for t in tests[m]:
-            print('   %s' % t[0])
 
 m = ''
 
-def get_module(modulename):
-    exec ('import test.%s; global m; m = test.%s' % (modulename, modulename))
-    return m
-
-
-def test_map(modulename):
-
-    def test_entry(entry):
-        return (entry[0].replace('_test','').replace('_','-'),
-                entry[1])
-
-    def tests(module):
-        functions = getmembers(module, isfunction)
-        return [test_entry(f) for f in functions if f[0].endswith('_test')]
-
-    return(tests(get_module(modulename)))
 
 
 def tst_command(self, args):
@@ -44,7 +20,7 @@ def tst_command(self, args):
         if cmd=='edit':
             tst_edit(self,args)
         elif cmd=='find':
-            tst_find()
+            print(tst_find())
         elif cmd=='list':
             print(tst_list())
         elif cmd=='output':
@@ -58,8 +34,6 @@ def tst_command(self, args):
              Test.objects.all().delete()
         elif cmd=='results':
             self.stdout.write(tst_results())
-        elif cmd=='send':
-            tst_send(self,args)
         else:
             tst_help(self)
     else:
@@ -94,7 +68,17 @@ def tst_diff(test_name):
 
 
 def tst_edit(self, args):
-    system('e %s' % join(environ['p'], 'test', args[0]+'_test.py'))
+    system('e %s' % args[0]+'_test.py')
+
+
+def tst_find():
+    tests = test_dictionary()
+    functions = []
+    for f in sorted(tests):
+        functions.append(f)
+        for t in tests[f]:
+            functions.append('   %s' % t[0])
+    return '\n'.join(functions)
 
 
 def tst_help(self):
@@ -138,6 +122,22 @@ def tst_like(self,args):
 def tst_list():
     tests = Test.objects.all().order_by('name')
     return '\n'.join([t.name for t in tests])
+
+
+def test_map(module_name):
+
+    def test_entry(entry):
+        return (entry[0].replace('_test','').replace('_','-'), entry[1])
+
+    def tests(module):
+        functions = getmembers(module, isfunction)
+        return [test_entry(f) for f in functions if f[0].endswith('_test')]
+
+    def get_module(module_name):
+        exec('import test.%s; global m; m = test.%s' % (module_name, module_name))
+        return m
+
+    return tests(get_module(module_name))
 
 
 def tst_output(self,args):
@@ -216,15 +216,5 @@ def tst_run(self,args):
                 run_test(self,test_entry)
         else:
             self.stdout.write("no test found: %s" % args[0])
-
-
-def tst_send(self,args):
-    min = 0
-    max = 100
-    label = 'Test Results'
-    results = shell('x tst results')
-    lines = results.split('\n')
-    if len(lines) < min or len(lines) > max:
-        shell('x email test')
 
 
