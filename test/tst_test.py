@@ -1,6 +1,6 @@
 from tool.shell import shell
 from tool.tst import *
-xxx
+
 
 def tst_code_test():
     return open('test/tst_test.py').read() + open('tool/tst.py').read()
