@@ -82,7 +82,8 @@ def deploy(args):
 
 
 def restart():
-    console(['systemctl restart gunicorn'], 'root')
+    # console(['sudo systemctl restart gunicorn'])
+    print('console -- sudo systemctl restart gunicorn')
 
 
 def runserver():

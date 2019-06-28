@@ -4,6 +4,7 @@
 alias app='dj app'
 
 alias b='brackets'
+alias brain='python $p/bin/brain.py'
 
 alias co='~/commit'
 alias console='ssh sensei@seamanfamily.org'
@@ -60,7 +61,7 @@ alias vc='python $p/bin/vc.py'
 
 function deploy {
     vc commit $* &&
-    python $p/bin/brain.py deploy $*
+    brain deploy $*
 }
 
 function ce {
