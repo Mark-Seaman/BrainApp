@@ -1,0 +1,82 @@
+#!/bin/bash
+# S2 Aliases
+
+alias app='dj app'
+
+alias b='brackets'
+
+alias co='~/commit'
+alias console='ssh sensei@seamanfamily.org'
+
+alias dj='./manage.py'
+alias ds='x doc search'
+
+alias ea='e $p/bin/bash-alias'
+
+alias firefox='open /Applications/Firefox.app'
+
+alias g='grep'
+alias ga='git add -A'
+alias gc='git commit -m'
+alias gco='git checkout'
+alias gd='vc diff'
+alias gl='git log --name-only'
+alias gs='vc status'
+
+alias h='history 40'
+alias host='hostname'
+
+alias ip='ifconfig|grep "inet "'
+
+alias l='ls -al'
+alias le='less'
+alias ll='ls -l'
+
+alias p='python'
+alias pull='vc pull'
+alias push='vc push'
+
+alias r=reset
+
+alias s='app search'
+alias s1='cd ~/Sensei; pipenv shell'
+alias s2='cd ~/S2; pipenv shell'
+
+alias tlike='dj scriptor test like'
+alias tlist='dj scriptor test list'
+alias todo='p bin/todo.py'
+alias tout='dj scriptor test output'
+alias tres='dj scriptor test results|less'
+alias trun='dj scriptor test run'
+alias tst='dj scriptor test '
+
+alias u='cd ..; l'
+
+alias vc='python $p/bin/vc.py'
+
+
+# ------------------------------
+# Functions
+
+function deploy {
+    vc commit $* &&
+    brain deploy $*
+}
+
+function ce {
+    cd $p && e */$1.py
+}
+
+function commit {
+    git status &&
+    git add . &&
+    git commit -m "$*" &&
+    git push
+}
+
+function d {
+    d=$1
+    [ "$1" == "" ] && d="$p"
+    echo $d && cd $d && ls -al
+}
+

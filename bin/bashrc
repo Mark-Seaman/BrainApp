@@ -1,0 +1,42 @@
+#!/bin/bash
+# Linux Shell Contexts
+
+if [ `hostname` == 'sensei-server' ]
+then
+    figlet 'Production Sensei Server'
+    . sensei/env/bin/activate
+    export p=$HOME
+else
+    export p=$HOME/Brain
+    figlet 'Brain'
+fi
+
+echo "p = $p"
+
+. bin/bash-alias
+. bin/bash-prompt
+export PATH=$PATH:$p:$p/bin
+echo "PATH = $PATH"
+
+# alias h='history 60'
+# alias gs='git status'
+# alias co='~/commit'
+# alias dj='./manage.py'
+
+ls -l
+
+
+# Setup Python Context
+
+# cd $p
+# [ "$p" != "$HOME/MyBook" ] &&
+# [ "$PIPENV_ACTIVE" != '1' ] && 
+# cd $p/hammer &&
+# figlet pipenv shell &&
+# pipenv shell 
+
+# Load the project profile for Sensei
+which python
+python --version
+pip list
+
