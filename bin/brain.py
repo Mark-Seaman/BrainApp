@@ -76,7 +76,7 @@ def console(args, user=None):
 
 def deploy(args):
     commit(args)
-    console (['./commit SENSEI_AUTO_COMMIT'])
+    console (['bin/commit SENSEI_AUTO_COMMIT'])
     restart()
     web()
 
