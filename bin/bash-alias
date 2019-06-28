@@ -60,7 +60,7 @@ alias vc='python $p/bin/vc.py'
 
 function deploy {
     vc commit $* &&
-    brain deploy $*
+    vc deploy $*
 }
 
 function ce {
