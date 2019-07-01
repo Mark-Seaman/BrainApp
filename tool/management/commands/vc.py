@@ -1,14 +1,30 @@
+from django.core.management.base import BaseCommand
 from os import chdir, environ, system
 from os.path import exists, join
-from sys import argv
+# from sys import argv
+import traceback
 
-from shell import shell_script
+from tool.log import log, log_exception
+from tool.shell import shell_script
 
 
 # ------------------------------
 # Command Interpreter
 
-def vc_command(options):
+class Command(BaseCommand):
+
+    def add_arguments(self, parser):
+        parser.add_argument('script', nargs='+', type=str)
+
+    def handle(self, *args, **options):
+        try:
+            vc_command(self, options['script'])
+        except:
+            log_exception()
+            self.stdout.write('** tst Exception (%s) **' % ' '.join(options['script']))
+            self.stdout.write(traceback.format_exc())
+
+def vc_command(self, options):
     if options:
         cmd = options[0]
         args = options[1:]
@@ -20,11 +36,11 @@ def vc_command(options):
         elif cmd == 'log':
             vc_log(args)
         elif cmd == 'pull':
-            vc_pull(args)
+            vc_pull()
         elif cmd == 'push':
-            vc_push(args)
+            vc_push()
         elif cmd == 'status':
-            vc_status(args)
+            vc_status()
         else:
             vc_help(args)
     else:
@@ -53,8 +69,8 @@ def vc_help(args=None):
 # Functions
 
 def git_cmd(cmd):
-    system(cmd)
-    # print(git_filter(shell_script(cmd)))
+    # system(cmd)
+    print(git_filter(shell_script(cmd)))
 
 
 def git_filter(text):
@@ -119,22 +135,19 @@ def vc_log(args):
     git_cmd(cmd %(d, d))
 
 
-def vc_pull(args):
+def vc_pull():
     for d in vc_dirs():
         cmd = 'echo pull %s && cd %s && git pull'
         git_cmd(cmd % (d, d))
 
 
-def vc_push(args):
+def vc_push():
     for d in vc_dirs():
         cmd = 'echo push %s && cd %s && git pull; git push'
         git_cmd(cmd % (d, d))
 
 
-def vc_status(args):
+def vc_status():
     for d in vc_dirs():
         cmd = 'echo status %s && cd %s && git status'
         git_cmd(cmd % (d, d))
-
-if __name__ == '__main__':
-    vc_command(argv[1:])

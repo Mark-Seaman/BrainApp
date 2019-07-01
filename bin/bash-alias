@@ -4,12 +4,15 @@
 alias app='dj app'
 
 alias b='brackets'
+alias br='cd ~/Brain/hammer; pipenv shell'
 
 alias co='~/commit'
 alias console='ssh sensei@seamanfamily.org'
 
+alias doc='dj doc'
+alias deploy='o deploy'
 alias dj='./manage.py'
-alias ds='x doc search'
+alias ds='doc search'
 
 alias ea='e $p/bin/bash-alias'
 
@@ -37,24 +40,25 @@ alias o='dj ocean'
 alias p='python'
 alias pull='vc pull'
 alias push='vc push'
+alias py='figlet Brain&&which python&&python --version&&pip list&&echo directory is `pwd`'
 
 alias r=reset
 
 alias s='app search'
-alias s1='cd ~/Sensei; pipenv shell'
-alias s2='cd ~/S2; pipenv shell'
+alias s1='cd ~/Sensei/hammer; pipenv shell'
+alias s2='cd ~/S2/hammer; pipenv shell'
 
-alias tlike='dj scriptor test like'
-alias tlist='dj scriptor test list'
+alias tlike='tst like'
+alias tlist='tst list'
 alias todo='p bin/todo.py'
-alias tout='dj scriptor test output'
-alias tres='dj scriptor test results|less'
-alias trun='dj scriptor test run'
-alias tst='dj scriptor test '
+alias tout='tst output'
+alias tres='tst results|less'
+alias trun='tst run'
+alias tst='dj tst '
 
 alias u='cd ..; l'
 
-alias vc='python $p/bin/vc.py'
+alias vc='dj vc'
 
 
 # ------------------------------

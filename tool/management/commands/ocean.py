@@ -88,12 +88,12 @@ def commit(args):
 def console(args):
     commmand = ' '.join(args)
     print('Remote Command: %s' % commmand)
-    system ('ssh sensei@%s %s' % (host,commmand))
+    system('ssh sensei@%s %s' % (host,commmand))
 
 
 def deploy(args):
     commit(args)
-    console (['bin/commit SENSEI_AUTO_COMMIT'])
+    console(['bin/commit SENSEI_AUTO_COMMIT'])
     restart()
     web()
 
