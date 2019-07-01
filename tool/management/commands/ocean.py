@@ -44,7 +44,6 @@ def ocean_command(self, options):
         elif cmd == 'serve':
             runserver()
         elif cmd == 'status':
-            print('xxx')
             system('cd ~/Brain; git status')
         elif cmd == 'web':
             web()
