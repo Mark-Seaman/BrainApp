@@ -4,7 +4,6 @@
 alias app='dj app'
 
 alias b='brackets'
-alias brain='python $p/bin/brain.py'
 
 alias co='~/commit'
 alias console='ssh sensei@seamanfamily.org'
@@ -32,6 +31,8 @@ alias ip='ifconfig|grep "inet "'
 alias l='ls -al'
 alias le='less'
 alias ll='ls -l'
+
+alias o='dj ocean'
 
 alias p='python'
 alias pull='vc pull'

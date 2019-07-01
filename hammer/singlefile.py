@@ -7,7 +7,7 @@ from django.http import HttpResponse
 DEBUG=True
 SECRET_KEY = 'KDqYibgo1ZI4QIHOFInXmTy6wknXxWiii5DBal825FQgCXo5zA'
 MIDDLEWARE_CLASSES = ()
-ROOT_URLCONF = 'sensei.settings'
+ROOT_URLCONF = 'hammer.settings'
 ALLOWED_HOSTS = ['*']
 
 # Home View

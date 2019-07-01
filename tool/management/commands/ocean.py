@@ -1,5 +1,8 @@
+from django.core.management.base import BaseCommand
 from os import system
-from sys import argv
+import traceback
+
+from tool.log import log_exception
 
 host = 'seamanfamily.org'
 
@@ -7,8 +10,25 @@ host = 'seamanfamily.org'
 # ----------------------------------
 # Command Interpreter
 
-def brain_command(options):
+
+class Command(BaseCommand):
+
+    def add_arguments(self, parser):
+        parser.add_argument('script', nargs='+', type=str)
+
+    def handle(self, *args, **options):
+        try:
+            ocean_command(self, options['script'])
+        except:
+            log_exception()
+            self.stdout.write('** tst Exception (%s) **' % ' '.join(options['script']))
+            self.stdout.write(traceback.format_exc())
+
+
+def ocean_command(self, options):
     '''Execute all of the brain specific brains'''
+    self.stdout.write('starting ocean command ...')
+
     if options:
         cmd = options[0]
         args = options[1:]
@@ -29,14 +49,15 @@ def brain_command(options):
         elif cmd == 'web':
             web()
         else:
-            print('No brain command found, ' + cmd)
-            brain_help()
+            print('No ocean command found, ' + cmd)
+            ocean_help()
     else:
         print('No arguments given')
-        brain_help()
+        ocean_help()
+    self.stdout.write('... ending  ocean command')
 
 
-def brain_help():
+def ocean_help():
     print('''
     usage:  brain cmd [args]
 
@@ -65,13 +86,10 @@ def commit(args):
     system('cd ~/Brain; git add .; git commit -m "%s"; git pull; git push' % comment)
 
 
-def console(args, user=None):
+def console(args):
     commmand = ' '.join(args)
     print('Remote Command: %s' % commmand)
-    if user:
-        system ('ssh %s@%s %s' % (user,host,commmand))
-    else:
-        system ('ssh sensei@%s %s' % (host,commmand))
+    system ('ssh sensei@%s %s' % (host,commmand))
 
 
 def deploy(args):
@@ -92,8 +110,4 @@ def runserver():
 
 def web():
     url = 'http://'+host
-    system('open -a "Google Chrome" %s' % url)
-
-
-if __name__ == '__main__':
-    print(brain_command(argv[1:]))
+    system('open -a "Firefox" %s' % url)

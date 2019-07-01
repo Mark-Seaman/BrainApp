@@ -5,7 +5,7 @@ from os.path import join
 from json import dumps
 
 from .files import read_text
-from sensei.settings import LOG_DIR
+from hammer.settings import LOG_DIR
 
 
 def log(text, value=None):

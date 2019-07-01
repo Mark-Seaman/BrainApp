@@ -18,12 +18,6 @@ def doc_list(path):
 
     return [doc_entry(path, f) for f in list_files(path)]
 
-#     files = list_files(path)
-#     result = []
-#     for f in files:
-#         result.append(doc_entry(path, f))
-#     return result
-
 
 # Find the path to the requested document
 def doc_path(doc):
@@ -61,13 +55,8 @@ def list_files(path):
             if f != '.DS_Store':
                 return f
 
-    return [file_entry(path, f) for f in sorted(listdir(doc_path(path)))]
-
-    # files = listdir(doc_path(path))
-    # result = []
-    # for f in sorted(files):
-    #     file_entry(path, f)
-    # return result
+    files = sorted(listdir(doc_path(path)))
+    return [file_entry(path, f) for f in files]
 
 
 # Convert markdown text to HTML

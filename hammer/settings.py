@@ -45,7 +45,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'sensei.urls'
+ROOT_URLCONF = 'hammer.urls'
 
 TEMPLATES = [
     {
@@ -63,7 +63,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sensei.wsgi.application'
+WSGI_APPLICATION = 'hammer.wsgi.application'
 
 # Secrets
 from .secret_settings import DATABASES, SECRET_KEY

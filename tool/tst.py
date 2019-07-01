@@ -1,7 +1,7 @@
 from inspect import getmembers, isfunction
 from os import listdir, system
 
-from sensei.settings import TEST_DIR
+from hammer.settings import TEST_DIR
 
 from .log import log
 from .models import Test
@@ -13,6 +13,7 @@ m = ''
 
 
 def tst_command(self, args):
+    self.stdout.write('starting test ...')
     if args:
         log('tst %s' % args)
         cmd = args[0]
@@ -39,6 +40,7 @@ def tst_command(self, args):
     else:
         tst_run(self,args)
         self.stdout.write(tst_results())
+    self.stdout.write('... ending test')
 
 
 def test_dictionary():
