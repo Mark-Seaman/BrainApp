@@ -82,7 +82,7 @@ def ocean_help():
 
 def commit(args):
     comment = ' '.join(args)
-    system('cd ~/Brain; git add .; git commit -m "%s"; git pull; git push' % comment)
+    system('cd $p; git add .; git commit -m "%s"; git pull; git push' % comment)
 
 
 def console(args):

@@ -14,21 +14,21 @@ from tool.tst import tst_command
 class Command(BaseCommand):
 
     def add_arguments(self, parser):
-        parser.add_argument('script', nargs='+', type=str)
+        parser.add_argument('command', nargs='*', type=str)
 
     def handle(self, *args, **options):
         try:
-            tst_command(self, options['script'])
+            # print('OPTIONS %s' % options['command'])
+            tst_command(self, options['command'])
         except:
             log_exception()
-            self.stdout.write('** tst Exception (%s) **' % ' '.join(options['script']))
+            self.stdout.write('** tst Exception (%s) **' % ' '.join(options['command']))
             self.stdout.write(traceback.format_exc())
 
 
 def tst_command(self, args):
-    self.stdout.write('starting test ...')
     if args:
-        log('tst %s' % args)
+        # log('tst %s' % args)
         cmd = args[0]
         args = args[1:]
         if cmd=='edit':
@@ -40,7 +40,7 @@ def tst_command(self, args):
         elif cmd=='output':
             tst_output(self,args)
         elif cmd=='run':
-            tst_run(self,args)
+            tst_run()
             self.stdout.write(tst_results())
         elif cmd=='like':
             tst_like(self,args)
@@ -51,9 +51,8 @@ def tst_command(self, args):
         else:
             tst_help(self)
     else:
-        tst_run(self,args)
+        tst_run()
         self.stdout.write(tst_results())
-    self.stdout.write('... ending test')
 
 
 def test_dictionary():
@@ -193,7 +192,6 @@ def tst_results():
              t.expected = 'Initial expectation'
              t.save()
         if t.output != t.expected:
-            # print('RESULTS ', t.name)
             diffs = differences(t.output, t.expected)
             return banner(t.name)+diffs
 
@@ -204,9 +202,9 @@ def tst_results():
         return 'no tests found'
 
 
-def tst_run(self,args):
+def tst_run():
 
-    def run_test(self,test_entry):
+    def run_test(test_entry):
         text = test_entry[1]()
         if not text:
             text = 'no output'
@@ -217,19 +215,10 @@ def tst_run(self,args):
 
     tests = test_dictionary()
     tst_register (tests)
-    # if not args:
-    self.stdout.write("running tests ...")
+    print("running tests ...")
 
     for m in sorted(tests):
         print('%s' % m)
         for test_entry in tests[m]:
-            run_test(self,test_entry)
-    # else:
-    #     test_cases = tests.get(args[0], None)
-    #     if test_cases:
-    #         for test_entry in test_cases:
-    #             run_test(self,test_entry)
-    #     else:
-    #         self.stdout.write("no test found: %s" % args[0])
-
+            run_test(test_entry)
 

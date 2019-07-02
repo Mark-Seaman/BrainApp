@@ -60,6 +60,10 @@ def check_shell_lines(cmd, min=0, max=10):
     return check_lines(cmd, shell(cmd), min, max)
 
 
+def curl_get(url):
+    return shell('curl -s %s' % url)
+
+
 def differences(answer, correct):
     '''   Calculate the diff of two strings   '''
     if answer != correct:
