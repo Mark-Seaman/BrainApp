@@ -45,6 +45,7 @@ alias py='figlet Brain&&which python&&python --version&&pip list&&echo directory
 alias r=reset
 
 alias s='app search'
+alias serve='web http://localhost:8000; dj runserver'
 alias s1='cd ~/Sensei/hammer; pipenv shell'
 alias s2='cd ~/S2/hammer; pipenv shell'
 
