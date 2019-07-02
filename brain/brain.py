@@ -60,7 +60,12 @@ def list_files(path):
 
 
 # Convert markdown text to HTML
-def markdown_to_html(markdown):
+def markdown_to_html(markdown, image_path='/static/images'):
+
+    def fix_images(text, image_path):
+        return text.replace('](img/', '](%s/' % image_path)
+
+    markdown = fix_images(markdown, image_path)
     return shell_pipe('pandoc', markdown)
 
 

@@ -4,9 +4,9 @@
 alias app='dj app'
 
 alias b='brackets'
-alias br='cd ~/Brain/hammer; pipenv shell'
+alias br='cd ~/Brain/hammer; pipenv shell; echo closing pipenv shell'
 
-alias co='~/commit'
+alias co='vc commit'
 alias console='ssh sensei@seamanfamily.org'
 
 alias doc='dj doc'
@@ -45,13 +45,13 @@ alias py='figlet Brain&&which python&&python --version&&pip list&&echo directory
 alias r=reset
 
 alias s='app search'
-alias serve='web http://localhost:8000; dj runserver'
-alias s1='cd ~/Sensei/hammer; pipenv shell'
-alias s2='cd ~/S2/hammer; pipenv shell'
+alias serve='web localhost:8000; dj runserver'
+alias s1='cd ~/Sensei/hammer; pipenv shell; echo closing pipenv shell'
+alias s2='cd ~/S2/hammer; pipenv shell; echo closing pipenv shell'
 
 alias tlike='tst like'
 alias tlist='tst list'
-alias todo='p bin/todo.py'
+alias todo='dj todo'
 alias tout='tst output'
 alias tres='tst results|less'
 alias trun='tst run'
@@ -60,6 +60,7 @@ alias tst='dj tst '
 alias u='cd ..; l'
 
 alias vc='dj vc'
+alias web='dj web'
 
 
 # ------------------------------
